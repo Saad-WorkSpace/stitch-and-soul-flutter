@@ -1,120 +1,184 @@
-# Stitch & Soul
+<p align="center">
+  <img src="docs/readme-hero.svg" alt="Stitch & Soul — garments made slowly for the long table" width="100%" />
+</p>
 
-An editorial, responsive Flutter storefront for a one-person clothing atelier. The app is web-first and remains compatible with Android and iOS.
+<p align="center">
+  <strong>An editorial Flutter storefront for a one-person clothing atelier.</strong><br />
+  Ready-to-wear, made-to-measure, and a shopping experience designed with care.
+</p>
 
-The product requirements are in [`docs/PRD.md`](docs/PRD.md).
+<p align="center">
+  <img src="https://img.shields.io/badge/Flutter-3.47.0-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter 3.47.0" />
+  <img src="https://img.shields.io/badge/Dart-3.13.0-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart 3.13.0" />
+  <img src="https://img.shields.io/badge/tests-26%20passing-2E7D32?style=for-the-badge&logo=checkmarx&logoColor=white" alt="26 tests passing" />
+  <img src="https://img.shields.io/badge/build-web%20ready-B4724B?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Web build ready" />
+</p>
 
-## What is implemented
+<p align="center">
+  <a href="#-the-experience">Experience</a> ·
+  <a href="#-quick-start">Quick start</a> ·
+  <a href="#-architecture">Architecture</a> ·
+  <a href="#-quality">Quality</a> ·
+  <a href="docs/PRD.md">Full PRD</a>
+</p>
 
-- Home, catalog, category, product detail, services, story, contact, favorites, cart, measurement wizard, demo checkout, success receipt, and not-found routes.
-- Thirteen clothing products across dresses, tops, bottoms, outerwear, and occasionwear.
-- Ready-to-wear and made-to-measure variants, sizes, colors, lead times, stock, care, and related products.
-- Search, category, availability, price, and sort controls.
-- Cart quantity changes, removal, promo codes, shipping/tax estimates, and a 25% made-to-measure surcharge.
-- Five-step measurement flow with cm/in support, validation, fit preference, notes, consent, review, and optional local persistence.
-- Riverpod state, `go_router` navigation, `SharedPreferences` persistence, responsive layouts, keyboard-aware controls, semantics, and reduced-motion behavior.
-- Local textile-style placeholders, so the experience remains usable without remote images.
+---
 
-## Prerequisites
+## ✦ The experience
 
-- Flutter stable 3.27 or newer.
-- Dart is included with Flutter.
-- Chrome or Edge for Flutter Web.
-- VS Code extensions: **Flutter** and **Dart**.
+Stitch & Soul turns a small atelier into a complete digital storefront. It combines calm editorial composition, tactile textile-inspired visuals, and practical commerce flows without depending on a live backend or remote image service.
 
-This project has been verified with Flutter 3.47.0 and Dart 3.13.0.
+| Discover | Personalize | Purchase |
+| :--- | :--- | :--- |
+| Browse 13 garments across five collections | Choose ready-to-wear or made-to-measure | Manage quantities, promos, shipping, and tax |
+| Search, filter, sort, and save favorites | Complete a guided five-step measurement profile | Walk through a safe, simulated checkout |
+| Explore story, craft, services, and care | Switch between centimeters and inches | Receive a polished mock order confirmation |
 
-Verify your environment:
+### Made to feel considered
+
+- **Editorial by design** — serif-led typography, generous whitespace, warm material colors, and handcrafted placeholder artwork.
+- **Motion with purpose** — staggered reveals, gradient orbs, hover lift, animated selections, and soft route transitions inspired by React Bits.
+- **Responsive everywhere** — layouts adapt from compact mobile screens to wide desktop canvases.
+- **Accessible foundations** — semantic controls, keyboard-aware interactions, visible hierarchy, and reduced-motion support.
+- **Local-first demo data** — favorites and consented measurements use local persistence; products remain dependable without a network.
+
+> [!NOTE]
+> This is a portfolio-quality commerce demo. Contact forms, newsletter signup, inventory, shipping quotes, tax calculation, and checkout are simulated. The app never requests or stores real payment credentials.
+
+## 🧵 Feature tour
+
+<table>
+  <tr>
+    <td width="33%" valign="top">
+      <h3>Collection</h3>
+      <p>Category routes, text search, availability and price filters, sorting, related garments, stock, fabric, care, and lead-time details.</p>
+    </td>
+    <td width="33%" valign="top">
+      <h3>Atelier</h3>
+      <p>A guided measurement wizard with unit conversion, validation, fit preferences, notes, consent, review, and cart attachment.</p>
+    </td>
+    <td width="33%" valign="top">
+      <h3>Commerce</h3>
+      <p>Favorites, cart editing, a 25% made-to-measure surcharge, demo promo codes, shipping thresholds, tax estimates, and receipt flow.</p>
+    </td>
+  </tr>
+</table>
+
+## 🚀 Quick start
+
+### Requirements
+
+- Flutter stable **3.27+**
+- Dart (included with Flutter)
+- Chrome or Edge for web development
+- The **Flutter** and **Dart** VS Code extensions
+
+This repository is verified with **Flutter 3.47.0** and **Dart 3.13.0**.
 
 ```powershell
-flutter doctor
-flutter --version
-```
-
-## Run locally
-
-From the project directory:
-
-```powershell
+git clone https://github.com/Saad-WorkSpace/stitch-and-soul-flutter.git
+cd stitch-and-soul-flutter
 flutter pub get
 flutter run -d chrome
 ```
 
-For a mobile emulator/device:
+For another emulator or connected device:
 
 ```powershell
 flutter devices
 flutter run -d <device-id>
 ```
 
-## Quality checks
+## 🏛 Architecture
+
+The application uses a small feature-first architecture. UI depends on state and repository interfaces, keeping today’s mock catalog replaceable with a production API later.
+
+```mermaid
+flowchart LR
+    Router["go_router\nNavigation"] --> Screens["Feature Screens"]
+    Design["Theme · Tokens · Motion"] --> Screens
+    Screens --> State["Riverpod State"]
+    State --> Repos["Repository Interfaces"]
+    Repos --> Catalog["Mock Catalog"]
+    Repos --> Local["Local Persistence"]
+```
+
+```text
+lib/
+├── app/          theme, motion, tokens, brand, routing, bootstrap
+├── data/         models, mock catalog, filtering, repositories
+├── features/     route-level screens grouped by experience
+├── state/        cart and catalog state
+└── widgets/      shared responsive, navigation, and product UI
+```
+
+### Core stack
+
+| Layer | Technology | Responsibility |
+| :--- | :--- | :--- |
+| UI | Flutter Material | Responsive storefront and interaction design |
+| State | Riverpod | Cart, catalog filters, favorites, and local repositories |
+| Navigation | `go_router` | URL-friendly routes and transitions |
+| Persistence | `shared_preferences` | Favorites and consented measurement profile |
+| Localization | `intl` + Flutter localizations | Currency and localization-ready foundations |
+
+## 🗺 Routes
+
+| Route | Experience | Route | Experience |
+| :--- | :--- | :--- | :--- |
+| `/` | Editorial home | `/services` | Services and alterations |
+| `/shop` | Full collection | `/story` | Atelier story |
+| `/shop/category/:category` | Category collection | `/contact` | Consultation form demo |
+| `/product/:slug` | Garment details | `/favorites` | Saved garments |
+| `/measurements/new` | Measurement wizard | `/cart` | Shopping bag |
+| `/checkout` | Simulated checkout | `/checkout/success` | Mock receipt |
+
+## ✅ Quality
+
+Every release can be checked with the same four-command gate:
 
 ```powershell
-dart format --set-exit-if-changed lib test
+dart format --output=none --set-exit-if-changed lib test
 flutter analyze
 flutter test
 flutter build web --release
 ```
 
-The focused tests cover catalog filtering, safe result limits, cart totals and quantities, measurement validation, and a home-to-product smoke path.
+| Check | Latest result |
+| :--- | :--- |
+| Dart formatting | Clean |
+| Flutter analysis | No issues found |
+| Automated tests | **26 passing** |
+| Production web build | Successful |
+| WebAssembly dry run | Successful |
 
-## Routes
+The suite covers catalog filtering, safe result limits, cart quantities and totals, promotions, measurement validation, responsive layout behavior, and the home-to-product shopping path.
 
-| Route | Experience |
-| --- | --- |
-| `/` | Editorial home |
-| `/shop` | Full catalog |
-| `/shop/category/:category` | Category catalog |
-| `/product/:slug` | Product detail |
-| `/measurements/new` | Measurement wizard |
-| `/services` | Made-to-measure and alterations |
-| `/story` | Atelier story |
-| `/contact` | Demo consultation/contact form |
-| `/favorites` | Saved garments |
-| `/cart` | Shopping bag |
-| `/checkout` | Demo checkout |
-| `/checkout/success` | Mock receipt |
+## 🎟 Demo details
 
-## Architecture
+Try the checkout flow with any of these local-only promotion codes:
 
-```text
-lib/
-  app/          theme, motion, tokens, brand details, router, bootstrap
-  data/         immutable models, mock catalog, filtering, repositories
-  state/        cart and catalog state
-  features/     route-level screens grouped by feature
-  widgets/      shared responsive, navigation, product, and visual widgets
-```
+| Code | Effect |
+| :--- | :--- |
+| `WELCOME10` | 10% off |
+| `ATELIER15` | 15% off |
+| `FREESHIP` | Free shipping |
 
-The app uses a small feature-first structure. Repositories isolate mocked data and local persistence, so a production API can replace them without rewriting route-level UI. State avoids generated code to keep the first setup predictable.
+No backend, authentication service, inventory API, email provider, analytics platform, or payment processor is connected. Product imagery intentionally uses local textile-style placeholders until licensed photography is supplied.
 
-Brand constants are centralized in `lib/app/brand.dart`. Visual tokens and breakpoints live in `lib/app/tokens.dart`; motion timings and reduced-motion handling live in `lib/app/motion.dart`.
+## 🌱 Production roadmap
 
-## Motion approach
+- Replace placeholders with optimized, licensed product photography.
+- Connect catalog, inventory, customer, order, shipping, tax, and CMS services behind the existing repository interfaces.
+- Add an audited hosted checkout instead of collecting raw payment information in the Flutter client.
+- Add localization, currencies, consent management, analytics, and error reporting.
+- Complete real-device accessibility testing at mobile, tablet, and desktop breakpoints.
+- Configure hosting rewrites so deep links return `index.html`.
 
-The React Bits reference is translated into native Flutter behavior: staggered hero reveals, animated gradient orbs, fade/slide route transitions, hover lift, animated chips and favorites, and smooth content switching. `MediaQuery.disableAnimations` disables decorative motion where requested.
+---
 
-## Demo behavior
-
-- No backend, authentication, inventory service, email delivery, shipping quote, tax service, or payment processor is connected.
-- Checkout never requests or stores real card credentials.
-- Cart state resets when the app restarts.
-- Favorites and a measurement profile are stored locally only when the applicable action/consent occurs.
-- Contact and newsletter forms show local confirmation but transmit nothing.
-- Product imagery is represented by reliable local placeholders.
-
-## Production next steps
-
-1. Run the quality commands above and fix any SDK-version-specific findings.
-2. Replace placeholders with optimized, licensed product photography.
-3. Connect catalog, inventory, customer, order, shipping, tax, analytics, and CMS services behind repository interfaces.
-4. Add an audited hosted checkout; never collect raw payment credentials in this Flutter client.
-5. Add localization, currency formatting, consent management, error reporting, and production analytics.
-6. Validate keyboard, screen-reader, contrast, text-scaling, and responsive behavior at 360, 768, and 1440 logical pixels.
-7. Configure web hosting rewrites so deep links return `index.html`.
-
-## Demo promo codes
-
-- `WELCOME10` — 10% off.
-- `ATELIER15` — 15% off.
-- `FREESHIP` — free shipping.
+<p align="center">
+  <strong>Stitch & Soul</strong><br />
+  <em>Garments made slowly, for the long table.</em><br /><br />
+  <a href="docs/PRD.md">Read the product requirements →</a>
+</p>
