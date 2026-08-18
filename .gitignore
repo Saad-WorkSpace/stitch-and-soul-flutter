@@ -1,0 +1,36 @@
+# Flutter / Dart
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.flutter-version
+.metadata
+coverage/
+
+# IDE
+.idea/
+.vscode/
+.claude/settings.local.json
+*.iml
+*.iws
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated
+**/*.g.dart
+**/*.freezed.dart
+**/*.mocks.dart
+
+# Misc
+.env
+.env.*
+!.env.example
+.cache/
+.vercel/
+.netlify/
+*.log

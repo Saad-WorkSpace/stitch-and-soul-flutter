@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#F5EFE6">
+  <meta name="description" content="Stitch &amp; Soul — a one-person atelier of ready-to-wear and made-to-measure garments.">
+  <meta property="og:title" content="Stitch &amp; Soul — Atelier">
+  <meta property="og:description" content="Ready-to-wear and made-to-measure garments, made with intention.">
+  <meta property="og:type" content="website">
+
+  <title>Stitch &amp; Soul — Atelier</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <style>
+    html, body { margin: 0; padding: 0; background: #F5EFE6; color: #1B1A17; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .ss-splash {
+      position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+      background: #F5EFE6; color: #1B1A17;
+    }
+    .ss-splash-mark {
+      font-family: "Cormorant Garamond", "Times New Roman", serif;
+      font-size: 28px; letter-spacing: 0.08em; text-transform: uppercase;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="ss-splash" id="ss-splash">
+    <div class="ss-splash-mark">Stitch &amp; Soul</div>
+  </div>
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      var el = document.getElementById('ss-splash');
+      if (el) el.remove();
+    });
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
