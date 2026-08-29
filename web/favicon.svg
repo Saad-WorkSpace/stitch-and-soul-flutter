@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="12" fill="#F5EFE6"/>
+  <rect width="64" height="64" rx="12" fill="#354437"/>
   <text x="50%" y="55%" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
-        font-size="34" fill="#1B1A17">S</text>
+        font-size="34" fill="#F7F8F3">É</text>
+  <circle cx="49" cy="49" r="3" fill="#F2B7C8"/>
 </svg>

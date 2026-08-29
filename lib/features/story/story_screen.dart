@@ -54,7 +54,7 @@ class StoryScreen extends StatelessWidget {
                         children: <Widget>[
                           _StoryParagraph(
                             text:
-                                'Stitch & Soul began in a small room above a print shop, '
+                                'ÉLISE began in a small room above a print shop, '
                                 'with a single used sewing machine and a stack of fabric '
                                 'samples from a mill that no longer exists.',
                           ),

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stitch_and_soul/app/router.dart';
 import 'package:stitch_and_soul/data/repositories.dart';
+import 'package:stitch_and_soul/widgets/app_widgets.dart';
 import 'package:stitch_and_soul/widgets/product_card.dart';
 
 void main() {
@@ -35,7 +36,7 @@ void main() {
     await tester.pump(const Duration(milliseconds: 800));
 
     // We are on the home screen.
-    expect(find.text('Stitch & Soul'), findsWidgets);
+    expect(find.text('ÉLISE'), findsWidgets);
     expect(
       find.text('Garments, made slowly,\nfor the long table.'),
       findsOneWidget,
@@ -43,7 +44,7 @@ void main() {
 
     // Tap the Shop the collection CTA in the hero.
     final shopCta = find.widgetWithText(
-      ElevatedButton,
+      SsMagneticButton,
       'SHOP THE COLLECTION',
     );
     await tester.ensureVisible(shopCta);

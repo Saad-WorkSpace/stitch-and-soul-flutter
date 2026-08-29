@@ -5,8 +5,8 @@ import 'app/router.dart';
 import 'app/brand.dart';
 import 'app/theme.dart';
 
-class StitchAndSoulApp extends ConsumerWidget {
-  const StitchAndSoulApp({super.key});
+class EliseApp extends ConsumerWidget {
+  const EliseApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

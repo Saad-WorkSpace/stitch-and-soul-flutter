@@ -84,7 +84,7 @@ class CheckoutSuccessScreen extends StatelessWidget {
                             ),
                             _Row(
                               label: 'Contact',
-                              value: 'hello@stitchandsoul.demo',
+                              value: 'hello@elise.demo',
                             ),
                           ],
                         ),

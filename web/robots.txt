@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: /sitemap.xml
+Sitemap: https://saad-workspace.github.io/stitch-and-soul-flutter/sitemap.xml

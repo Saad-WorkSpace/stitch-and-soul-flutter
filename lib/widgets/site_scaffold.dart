@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../app/motion.dart';
 import '../app/tokens.dart';
 import '../app/brand.dart';
 import '../state/cart_notifier.dart';
@@ -38,8 +39,8 @@ class SiteScaffold extends ConsumerWidget {
       backgroundColor: SsColors.ivory,
       elevation: 0,
       scrolledUnderElevation: 0,
-      toolbarHeight: 72,
-      titleSpacing: 0,
+      toolbarHeight: 84,
+      titleSpacing: showMenu ? 0 : 24,
       automaticallyImplyLeading: false,
       leading: showMenu
           ? Builder(
@@ -56,27 +57,8 @@ class SiteScaffold extends ConsumerWidget {
       title: const _BrandLogo(),
       actions: <Widget>[
         if (!isCompact) ...<Widget>[
-          _NavLink(
-            label: 'Shop',
-            route: '/shop',
-            active: location.startsWith('/shop'),
-          ),
-          _NavLink(
-            label: 'Services',
-            route: '/services',
-            active: location == '/services',
-          ),
-          _NavLink(
-            label: 'Story',
-            route: '/story',
-            active: location == '/story',
-          ),
-          _NavLink(
-            label: 'Contact',
-            route: '/contact',
-            active: location == '/contact',
-          ),
-          const SizedBox(width: 8),
+          _PillNavigation(location: location),
+          const SizedBox(width: 12),
         ],
         _IconAction(
           tooltip: 'Favorites',
@@ -102,30 +84,201 @@ class SiteScaffold extends ConsumerWidget {
   }
 }
 
-class _BrandLogo extends StatelessWidget {
+class _BrandLogo extends StatefulWidget {
   const _BrandLogo();
 
   @override
+  State<_BrandLogo> createState() => _BrandLogoState();
+}
+
+class _BrandLogoState extends State<_BrandLogo> {
+  bool _hovered = false;
+
+  @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => context.go('/'),
-      borderRadius: BorderRadius.circular(4),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-        child: Text(
-          SsBrand.name,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontFamily: 'serif',
-                fontWeight: FontWeight.w500,
-                letterSpacing: 0.5,
+    final reduced = prefersReducedMotion(context);
+    return Semantics(
+      label: 'ÉLISE, home',
+      button: true,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        onEnter: (_) => setState(() => _hovered = true),
+        onExit: (_) => setState(() => _hovered = false),
+        child: Tooltip(
+          message: SsBrand.name,
+          waitDuration: const Duration(milliseconds: 700),
+          child: InkWell(
+            onTap: () => context.go('/'),
+            borderRadius: BorderRadius.circular(SsRadii.pill),
+            child: AnimatedContainer(
+              duration: reduced ? Duration.zero : SsDurations.short,
+              curve: SsCurves.emphasized,
+              padding: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                color: _hovered
+                    ? SsColors.surface
+                    : SsColors.ivory.withValues(alpha: 0),
+                borderRadius: BorderRadius.circular(SsRadii.pill),
+                boxShadow: <BoxShadow>[
+                  if (_hovered)
+                    BoxShadow(
+                      color: SsColors.clay.withValues(alpha: 0.16),
+                      blurRadius: 18,
+                      offset: const Offset(0, 6),
+                    ),
+                ],
               ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const SizedBox(
+                    width: 42,
+                    height: 42,
+                    child: CustomPaint(painter: _EliseMarkPainter()),
+                  ),
+                  ClipRect(
+                    child: AnimatedSize(
+                      duration: reduced ? Duration.zero : SsDurations.medium,
+                      curve: SsCurves.emphasized,
+                      alignment: Alignment.centerLeft,
+                      child: SizedBox(
+                        width: _hovered ? 126 : 0,
+                        child: AnimatedOpacity(
+                          opacity: _hovered ? 1 : 0,
+                          duration: reduced ? Duration.zero : SsDurations.short,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 12),
+                            child: Transform.translate(
+                              offset: Offset(_hovered ? 0 : -10, 0),
+                              child: Text(
+                                SsBrand.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.visible,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(
+                                      fontFamily: 'serif',
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: 0.35,
+                                    ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
   }
 }
 
-class _NavLink extends StatelessWidget {
+class _EliseMarkPainter extends CustomPainter {
+  const _EliseMarkPainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final rect = Offset.zero & size;
+    final background = Paint()
+      ..shader = const LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: <Color>[Color(0xFF354437), Color(0xFF172019)],
+      ).createShader(rect);
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(rect.deflate(1), const Radius.circular(14)),
+      background,
+    );
+
+    final monogram = TextPainter(
+      text: const TextSpan(
+        text: 'É',
+        style: TextStyle(
+          color: Color(0xFFF7F8F3),
+          fontFamily: 'serif',
+          fontSize: 28,
+          fontWeight: FontWeight.w500,
+          height: 1,
+        ),
+      ),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    monogram.paint(
+      canvas,
+      Offset(
+        (size.width - monogram.width) / 2,
+        (size.height - monogram.height) / 2 + 1,
+      ),
+    );
+
+    canvas.drawCircle(
+      Offset(size.width * 0.78, size.height * 0.78),
+      3,
+      Paint()..color = const Color(0xFFF2B7C8),
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant _EliseMarkPainter oldDelegate) => false;
+}
+
+class _PillNavigation extends StatelessWidget {
+  const _PillNavigation({required this.location});
+
+  final String location;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.72),
+        borderRadius: BorderRadius.circular(SsRadii.pill),
+        border: Border.all(color: SsColors.claySoft.withValues(alpha: 0.78)),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: SsColors.clay.withValues(alpha: 0.12),
+            blurRadius: 20,
+            offset: const Offset(0, 7),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          _NavLink(
+            label: 'Shop',
+            route: '/shop',
+            active: location.startsWith('/shop'),
+          ),
+          _NavLink(
+            label: 'Services',
+            route: '/services',
+            active: location == '/services',
+          ),
+          _NavLink(
+            label: 'Story',
+            route: '/story',
+            active: location == '/story',
+          ),
+          _NavLink(
+            label: 'Contact',
+            route: '/contact',
+            active: location == '/contact',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _NavLink extends StatefulWidget {
   const _NavLink({
     required this.label,
     required this.route,
@@ -136,22 +289,53 @@ class _NavLink extends StatelessWidget {
   final bool active;
 
   @override
+  State<_NavLink> createState() => _NavLinkState();
+}
+
+class _NavLinkState extends State<_NavLink> {
+  bool _hovered = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4),
-      child: TextButton(
-        onPressed: () => context.go(route),
-        style: TextButton.styleFrom(
-          foregroundColor: active ? SsColors.ink : SsColors.inkMuted,
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontSize: 12,
-            letterSpacing: 1.4,
-            fontWeight: FontWeight.w600,
-            decoration: active ? TextDecoration.underline : null,
-            decorationThickness: 1.2,
+    final emphasized = widget.active || _hovered;
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() => _hovered = false),
+      child: Semantics(
+        selected: widget.active,
+        button: true,
+        child: InkWell(
+          onTap: () => context.go(widget.route),
+          borderRadius: BorderRadius.circular(SsRadii.pill),
+          child: AnimatedContainer(
+            duration: SsDurations.short,
+            curve: SsCurves.emphasized,
+            padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 11),
+            decoration: BoxDecoration(
+              color: widget.active
+                  ? SsColors.clay
+                  : (_hovered ? const Color(0xFFE6EFE2) : Colors.transparent),
+              borderRadius: BorderRadius.circular(SsRadii.pill),
+              boxShadow: <BoxShadow>[
+                if (widget.active)
+                  BoxShadow(
+                    color: SsColors.clay.withValues(alpha: 0.26),
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
+                  ),
+              ],
+            ),
+            child: AnimatedDefaultTextStyle(
+              duration: SsDurations.short,
+              style: TextStyle(
+                color: widget.active ? Colors.white : SsColors.ink,
+                fontSize: 12,
+                letterSpacing: 1.15,
+                fontWeight: emphasized ? FontWeight.w800 : FontWeight.w700,
+              ),
+              child: Text(widget.label),
+            ),
           ),
         ),
       ),
@@ -182,10 +366,31 @@ class _IconAction extends StatelessWidget {
       child: Stack(
         clipBehavior: Clip.none,
         children: <Widget>[
-          IconButton(
-            tooltip: tooltip,
-            icon: Icon(icon, size: 20),
-            onPressed: onTap,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: route == '/favorites'
+                    ? const Color(0xFFFBE7ED)
+                    : const Color(0xFFEAF1E6),
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: route == '/favorites'
+                      ? SsColors.rose.withValues(alpha: 0.45)
+                      : SsColors.clay.withValues(alpha: 0.42),
+                ),
+              ),
+              child: IconButton(
+                tooltip: tooltip,
+                style: IconButton.styleFrom(
+                  foregroundColor: SsColors.ink,
+                  hoverColor: Colors.white.withValues(alpha: 0.7),
+                  minimumSize: const Size(42, 42),
+                ),
+                icon: Icon(icon, size: 20),
+                onPressed: onTap,
+              ),
+            ),
           ),
           if (badge > 0)
             Positioned(
