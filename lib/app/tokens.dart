@@ -1,33 +1,35 @@
 import 'package:flutter/material.dart';
 
-/// Stitch & Soul — central design tokens.
+/// ÉLISE — central design tokens.
 ///
 /// These are the only place in the codebase where colors, spacing, radii,
 /// breakpoints, and motion timings are defined. Anything visual reaches for
 /// a token first.
-/// Brand palette — warm ivory, ink, clay, muted sage.
+/// Brand palette — botanical sage, blush pink, and warm white.
 class SsColors {
   SsColors._();
 
   // Surfaces
-  static const Color ivory = Color(0xFFF5EFE6);
-  static const Color surface = Color(0xFFFBF7F1);
-  static const Color surfaceMuted = Color(0xFFEDE6D8);
-  static const Color divider = Color(0xFFE0D7C5);
-  static const Color grain = Color(0xFFE8E0CE);
+  static const Color ivory = Color(0xFFF7F8F3);
+  static const Color surface = Color(0xFFFFFCFD);
+  static const Color surfaceMuted = Color(0xFFF0F3EC);
+  static const Color divider = Color(0xFFD9E1D5);
+  static const Color grain = Color(0xFFE7ECE2);
 
   // Ink
-  static const Color ink = Color(0xFF1B1A17);
-  static const Color inkMuted = Color(0xFF5A554C);
-  static const Color inkSoft = Color(0xFF8A8478);
+  static const Color ink = Color(0xFF1E2720);
+  static const Color inkMuted = Color(0xFF566158);
+  static const Color inkSoft = Color(0xFF889286);
 
   // Accents
-  static const Color clay = Color(0xFFB4724B);
-  static const Color claySoft = Color(0xFFD9B59A);
-  static const Color sage = Color(0xFF7A8C73);
-  static const Color sageSoft = Color(0xFFB7C2B0);
-  static const Color rose = Color(0xFFB57A7A);
-  static const Color gold = Color(0xFFB89A5A);
+  // Legacy names are retained so older widgets inherit the new theme without
+  // duplicating color values. `clay` is now the primary sage accent.
+  static const Color clay = Color(0xFF7F947A);
+  static const Color claySoft = Color(0xFFE9B8C5);
+  static const Color sage = Color(0xFF72866D);
+  static const Color sageSoft = Color(0xFFBFCDBA);
+  static const Color rose = Color(0xFFD58FA5);
+  static const Color gold = Color(0xFFF0CBD6);
 
   // Status
   static const Color error = Color(0xFFB04545);
@@ -35,14 +37,14 @@ class SsColors {
 
   // Imagery placeholder fills (so we never show a broken image)
   static const List<Color> placeholderPalette = <Color>[
-    Color(0xFFE9DBC6),
-    Color(0xFFD9C2A6),
-    Color(0xFFC8B59A),
-    Color(0xFFB7C2B0),
-    Color(0xFFB57A7A),
-    Color(0xFFB4724B),
-    Color(0xFF7A8C73),
-    Color(0xFF8A8478),
+    Color(0xFFF4E5EA),
+    Color(0xFFDDE7D8),
+    Color(0xFFF8F9F5),
+    Color(0xFFBFCDBA),
+    Color(0xFFD58FA5),
+    Color(0xFFE9B8C5),
+    Color(0xFF72866D),
+    Color(0xFF889286),
   ];
 }
 

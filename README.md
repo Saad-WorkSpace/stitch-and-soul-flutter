@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="./web/favicon.svg" alt="Stitch & Soul logo" width="84">
+  <img src="./web/favicon.svg" alt="ÉLISE logo" width="84">
 
-  <h1>Stitch & Soul</h1>
+  <h1>ÉLISE</h1>
 
   <p><strong>Garments made slowly, for the long table.</strong></p>
   <p>
@@ -10,6 +10,8 @@
   </p>
 
   <p>
+    <a href="https://saad-workspace.github.io/stitch-and-soul-flutter/"><strong>View the live ÉLISE website →</strong></a>
+    &nbsp;·&nbsp;
     <a href="./docs/PRD.md"><strong>Read the full product requirements →</strong></a>
   </p>
 
@@ -21,15 +23,15 @@
   </p>
 </div>
 
-![Stitch & Soul storefront preview](./docs/readme-hero.svg)
+![ÉLISE storefront preview](./docs/readme-hero.svg)
 
-## About Stitch & Soul
+## About ÉLISE
 
-Stitch & Soul turns a small independent atelier into a complete digital storefront. Customers can discover garments, compare ready-to-wear and made-to-measure options, save favorites, record measurements, build a shopping bag, and complete a safe demonstration checkout.
+ÉLISE turns a small independent atelier into a complete digital storefront. Customers can discover garments, compare ready-to-wear and made-to-measure options, save favorites, record measurements, build a shopping bag, and complete a safe demonstration checkout.
 
 The experience combines editorial composition, warm textile-inspired visuals, and practical commerce flows in one responsive Flutter application. It is web-first and remains compatible with Android and iOS.
 
-## What Stitch & Soul includes
+## What ÉLISE includes
 
 | Experience | What it does | Customer outcome |
 | --- | --- | --- |
@@ -145,8 +147,8 @@ The repository is intentionally safe to explore as a portfolio-quality commerce 
 > [!CAUTION]
 > Connect an audited hosted checkout before accepting real orders. Never collect raw payment credentials directly in this Flutter client or commit private service keys to the repository.
 
-## Explore Stitch & Soul
+## Explore ÉLISE
 
 Read the product requirements for the complete vision, customer journeys, design direction, architecture, acceptance criteria, and production roadmap:
 
-### [Open the Stitch & Soul PRD →](./docs/PRD.md)
+### [Open the ÉLISE PRD →](./docs/PRD.md)

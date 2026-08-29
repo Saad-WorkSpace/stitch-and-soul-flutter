@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
-  <title id="title">Stitch &amp; Soul</title>
+  <title id="title">ÉLISE</title>
   <desc id="desc">An editorial banner for a Flutter clothing atelier storefront.</desc>
   <defs>
     <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#FBF7F1"/>
-      <stop offset="0.52" stop-color="#F1E7D9"/>
-      <stop offset="1" stop-color="#E8D6C3"/>
+      <stop offset="0" stop-color="#FFFCFD"/>
+      <stop offset="0.52" stop-color="#F0F3EC"/>
+      <stop offset="1" stop-color="#F4E5EA"/>
     </linearGradient>
     <linearGradient id="cloth" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#B4724B"/>
-      <stop offset="1" stop-color="#8E5135"/>
+      <stop offset="0" stop-color="#7F947A"/>
+      <stop offset="1" stop-color="#52644F"/>
     </linearGradient>
     <pattern id="weave" width="12" height="12" patternUnits="userSpaceOnUse">
       <path d="M0 2h12M0 8h12M2 0v12M8 0v12" stroke="#1B1A17" stroke-opacity=".035" stroke-width="1"/>
@@ -23,7 +23,7 @@
   <rect width="1200" height="420" rx="28" fill="url(#weave)"/>
 
   <path d="M-30 340C180 245 270 460 495 341S839 194 1230 318" fill="none" stroke="#7A8C73" stroke-width="2" stroke-dasharray="3 10" opacity=".8"/>
-  <path d="M-40 366C187 272 301 487 514 369S863 225 1240 339" fill="none" stroke="#B4724B" stroke-width="1.5" opacity=".45"/>
+  <path d="M-40 366C187 272 301 487 514 369S863 225 1240 339" fill="none" stroke="#D58FA5" stroke-width="1.5" opacity=".45"/>
 
   <g transform="translate(860 44)" filter="url(#shadow)">
     <path d="M92 18c74 13 135 76 143 156 7 70-27 137-88 172L21 271C7 198 18 120 61 55Z" fill="url(#cloth)"/>
@@ -35,8 +35,8 @@
   </g>
 
   <g transform="translate(82 74)">
-    <text x="0" y="0" dominant-baseline="hanging" fill="#B4724B" font-family="Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="5">A ONE-PERSON ATELIER</text>
-    <text x="0" y="78" dominant-baseline="hanging" fill="#1B1A17" font-family="Georgia, 'Times New Roman', serif" font-size="76" font-weight="400" letter-spacing="-2">Stitch &amp; Soul</text>
+    <text x="0" y="0" dominant-baseline="hanging" fill="#7F947A" font-family="Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="5">A ONE-PERSON ATELIER</text>
+    <text x="0" y="78" dominant-baseline="hanging" fill="#1E2720" font-family="Georgia, 'Times New Roman', serif" font-size="76" font-weight="400" letter-spacing="4">ÉLISE</text>
     <line x1="2" y1="176" x2="624" y2="176" stroke="#1B1A17" stroke-opacity=".22"/>
     <text x="0" y="206" dominant-baseline="hanging" fill="#4C4942" font-family="Georgia, 'Times New Roman', serif" font-size="29" font-style="italic">Garments made slowly, for the long table.</text>
     <text x="0" y="268" dominant-baseline="hanging" fill="#68635B" font-family="Arial, sans-serif" font-size="16" letter-spacing="1.2">FLUTTER · RIVERPOD · EDITORIAL COMMERCE</text>

@@ -117,7 +117,7 @@ class _Hero extends StatelessWidget {
                             ConstrainedBox(
                               constraints: const BoxConstraints(maxWidth: 520),
                               child: const Text(
-                                'Stitch & Soul is a small atelier in the European '
+                                'ÉLISE is a small atelier in the European '
                                 'tradition — ready-to-wear pieces and made-to-measure '
                                 'commissions, cut and sewn by hand, one at a time.',
                                 style: TextStyle(
@@ -132,13 +132,14 @@ class _Hero extends StatelessWidget {
                               spacing: 12,
                               runSpacing: 12,
                               children: <Widget>[
-                                ElevatedButton(
+                                SsMagneticButton(
+                                  label: 'SHOP THE COLLECTION',
                                   onPressed: () => context.go('/shop'),
-                                  child: const Text('SHOP THE COLLECTION'),
                                 ),
-                                OutlinedButton(
+                                SsMagneticButton(
+                                  label: 'MADE TO MEASURE',
+                                  secondary: true,
                                   onPressed: () => context.go('/services'),
-                                  child: const Text('MADE TO MEASURE'),
                                 ),
                               ],
                             ),
@@ -170,10 +171,13 @@ class _HeroCollage extends StatelessWidget {
       children: <Widget>[
         AspectRatio(
           aspectRatio: 4 / 5,
-          child: SsImagePlaceholder(
-            label: 'Atelier · Look 01',
-            seed: 7,
-            radius: SsRadii.md,
+          child: SsHolographicCard(
+            radius: SsRadii.lg,
+            child: SsImagePlaceholder(
+              label: 'Atelier · Look 01',
+              seed: 7,
+              radius: SsRadii.lg,
+            ),
           ),
         ),
         SizedBox(height: 12),

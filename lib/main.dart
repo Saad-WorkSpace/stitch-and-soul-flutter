@@ -21,7 +21,7 @@ Future<void> main() async {
           MeasurementsRepository(prefs),
         ),
       ],
-      child: const SsBootstrap(child: StitchAndSoulApp()),
+      child: const SsBootstrap(child: EliseApp()),
     ),
   );
 }

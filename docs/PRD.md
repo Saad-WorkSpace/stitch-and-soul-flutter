@@ -1,4 +1,4 @@
-# Stitch & Soul — Product Requirements Document
+# ÉLISE — Product Requirements Document
 
 > Version: 1.0 (MVP demo) · Owner: Maker · Status: Implementation-ready
 > Last updated: 2026-08-17
@@ -7,7 +7,7 @@
 
 ## 1. Executive summary
 
-**Stitch & Soul** is an independent sewing atelier and custom-clothing brand. The MVP is a
+**ÉLISE** is an independent sewing atelier and custom-clothing brand. The MVP is a
 Flutter storefront (web-first, mobile/tablet responsive, mobile-compatible) that lets
 visitors discover the maker's work, browse ready-to-wear and made-to-measure garments,
 save favorites, capture custom measurements, and walk through a believable demo
